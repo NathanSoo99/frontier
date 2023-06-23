@@ -1,11 +1,13 @@
+import Frontend from './Frontend';
+
 import './App.css';
 
 function App() {
-  return (
+    return (
     <>
-      Hello World!!
+        <Frontend />
     </>
-  );
+    );
 }
 
 export default App;
