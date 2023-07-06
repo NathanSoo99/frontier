@@ -1,12 +1,12 @@
 import React from 'react'
 
-const Building = ({ hello, info }) => {
+const Building = ({ info, setDisplay }) => {
 
     return (
-        <div>
-            <div>{hello}</div>
+        <button onClick={() => (setDisplay(2))}>
+            <div>hello</div>
             <div>{info.id}</div>
-        </div>
+        </button>
     )
 }
 
