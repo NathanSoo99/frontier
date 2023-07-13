@@ -3,9 +3,9 @@ import React from 'react'
 const Building = ({ info, setDisplay }) => {
 
     return (
-        <button onClick={() => (setDisplay(2))}>
-            <div>hello</div>
-            <div>{info.id}</div>
+        <button onClick={() => (setDisplay("displayBuilding", info))}>
+            <div>{info.getName()}</div>
+            <div>{info.getNPositions()}</div>
         </button>
     )
 }

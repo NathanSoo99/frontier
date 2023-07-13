@@ -1,18 +1,18 @@
 import { buildingStats } from "./BuildingReference"
 import Building from "./Building"
 
-const Mine = class Mine extends Building {
+const Farm = class Farm extends Building {
     constructor() {
-        super(buildingStats.mine.positions)
+        super(buildingStats.farm.positions)
     }
 
     applyEffect = (game) => {
-        console.log("Mine Effect Activated")
+        console.log("Farm Effect Activated")
     }
 
     getName = () => {
-        return "Mine"
+        return "Farm"
     }
 }
 
-export default Mine
+export default Farm

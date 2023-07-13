@@ -1,20 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import Building from './Building'
 
-const Buildings = ({ setDisplay }) => {
-    const [buildings, setBuildings] = useState([{id: 1}, {id:2}])
-
-    const addBuilding = () => {
-        setBuildings(buildings.concat({id:3}))
-    }
-
+const Buildings = ({ setDisplay, buildings }) => {
     return (
         <div>
             <div>{buildings.map((value, key) => (
                 <Building key={key} info={value} setDisplay={setDisplay}/>
             ))}</div>
-            <button onClick={() => (addBuilding)}>Add Building</button>
+            <button onClick={() => (setDisplay("displayConstructBuilding"))}>
+                Add Building
+            </button>
         </div>
     )
 }

@@ -1,10 +1,11 @@
 import React from 'react'
 
 const Person = ({ info }) => {
+    const name = info.getName()
+
     return (
         <div>
-            <div>{info.name}</div>
-            <div>{info.occupation}</div>
+            <div>{name}</div>
         </div>
     )
 }
