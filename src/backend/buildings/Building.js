@@ -27,7 +27,7 @@ const Building = class Building {
         this.workers[position].removeWorkplace()
         this.workers[position] = null
     }
-    getWorker = () => {
+    getWorkers = () => {
         return this.workers
     }
 

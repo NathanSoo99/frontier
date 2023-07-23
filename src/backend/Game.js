@@ -28,7 +28,7 @@ const Game = class Game {
     }
 
     addPerson = () => {
-        const person = new Person()
+        const person = new Person(this.people.length)
         this.people.push(person)
         return person
     }

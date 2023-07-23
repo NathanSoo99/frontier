@@ -35,14 +35,14 @@ const Frontend = () => {
     }
 
     const pages = {
-        buildings: <Buildings setDisplay={updateDisplay} buildings={buildings} people={people}/>,
+        buildings: <Buildings setDisplay={updateDisplay} buildings={buildings}/>,
         economy: <Economy setDisplay={updateDisplay}/>,
         people: <People setDisplay={updateDisplay} people={people}/>
     }
 
     const displays = {
         blank: <div>Hello World</div>,
-        displayBuilding: <DisplayBuilding info={displayInfo}/>,
+        displayBuilding: <DisplayBuilding building={displayInfo} people={people}/>,
         displayConstructBuilding: <DisplayConstructBuilding addBuilding={addBuilding}/>,
     }
 
