@@ -16,6 +16,11 @@ const Frontend = () => {
 
     const gameRef = useRef(new Game())
 
+    const [food, setFood] = useState(gameRef.current.getResource("food"))
+    const [stone, setStone] = useState(gameRef.current.getResource("stone"))
+    const [metal, setMetal] = useState(gameRef.current.getResource("metal"))
+    const [wood, setWood] = useState(gameRef.current.getResource("wood"))
+
     const [buildings, setBuildings] = useState([])
     const [people, setPeople] = useState([])
 
@@ -25,9 +30,15 @@ const Frontend = () => {
     }
 
     const addBuilding = (type) => {
-        setBuildings(buildings.concat([gameRef.current.addBuilding(type)]))
-        console.log(gameRef.current.getBuildings())
-        console.log(buildings)
+        const newBuilding = gameRef.current.addBuilding(type)
+        if (newBuilding !== null) {
+            setBuildings(buildings.concat([newBuilding]))
+            setStone(gameRef.current.getResource("stone"))
+            setMetal(gameRef.current.getResource("metal"))
+            setWood(gameRef.current.getResource("wood"))
+            console.log(gameRef.current.getResource("stone"))
+        }
+        console.log(newBuilding)
     }
 
     const addPerson = () => {
@@ -49,6 +60,14 @@ const Frontend = () => {
     return (
         <div>
             <div>
+                <h2>Resources</h2>
+                <div>Food: {food}</div>
+                <div>Stone: {stone}</div>
+                <div>Metal: {metal}</div>
+                <div>Wood: {wood}</div>
+            </div>
+            <div>
+                <h2>Menu</h2>
                 <div>
                     <button onClick = {() => setTabKey("buildings")}>Buildings</button>
                     <button onClick = {() => setTabKey("economy")}>Economy</button>
@@ -56,8 +75,15 @@ const Frontend = () => {
                 </div>
                 <div>{pages[tabKey]}</div>
             </div>
-            <button onClick={() => addPerson()}>Add Person</button>
-            <div className="display">{displays[displayKey]}</div>
+            <div>
+                <h2>Display</h2>
+                <div className="display">{displays[displayKey]}</div>
+            </div>
+            <div>
+                <h2>Dev Tools</h2>
+                <button onClick={() => addPerson()}>Add Person</button>
+            </div>
+            
         </div>
     )
 }

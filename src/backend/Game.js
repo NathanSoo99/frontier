@@ -14,14 +14,14 @@ const Game = class Game {
     }
 
     addBuilding = (key) => {
-        if (buildingStats[key]["cost"].keys.filter(
+        if (Object.keys(buildingStats[key]["cost"]).filter(
             (resource) => (
-                buildingStats["cost"][resource] > this.resources[resource]
+                buildingStats[key]["cost"][resource] > this.resources[resource]
             )
-        ) === []) {
+        ).length === 0) {
             const building = new buildingData[key]()
             this.buildings.push(building)
-            buildingStats[key]["cost"].keys.forEach(
+            Object.keys(buildingStats[key]["cost"]).forEach(
                 (resource) => (
                     this.resources[resource] -= buildingStats[key]["cost"][resource]
                 )
