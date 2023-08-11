@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-const DisplayBuilding = ({ building, people }) => {
+const DisplayBuilding = ({ building, people, levelUp }) => {
     const buildingName = building.getName()
     const nPositions = building.getNPositions()
     const [buildingWorkers, setBuildingWorkers] = useState(building.getWorkers())
@@ -30,6 +30,7 @@ const DisplayBuilding = ({ building, people }) => {
             </div>
             <div>Apprentice</div>
             <div>{buildingApprentice}</div>
+            <button onClick={() => {levelUp(building.getIndex())}}>Upgrade Building</button>
         </div>
     )
 }

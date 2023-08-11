@@ -1,18 +1,29 @@
 import { buildingStats } from "./BuildingReference"
 
 import Building from "./Building"
+import skills from "../Skills"
 
 const Encampment = class Encampment extends Building {
-    constructor() {
-        super(buildingStats.encampment.positions)
-    }
+    static key = "encampment"
 
-    applyEffect = (game) => {
-        console.log("Encampment Effect Activated")
+    constructor(index) {
+        super(buildingStats[Encampment.key].positions, index)
     }
 
     getName = () => {
-        return "Encampment"
+        return Encampment.key.at(0).toUpperCase() + Encampment.key.slice(1)
+    }
+
+    getKey = () => {
+        return Encampment.key
+    }
+
+    applyEffect = (game) => {
+        game.setDefence(game.getDefence() + 100 * this.level)
+    }
+
+    levelUp = (game) => {
+        this.level += 1
     }
 }
 

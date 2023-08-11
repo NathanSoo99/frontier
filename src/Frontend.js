@@ -16,10 +16,15 @@ const Frontend = () => {
 
     const gameRef = useRef(new Game())
 
+    const [day, setDay] = useState(gameRef.current.getDay())
+
     const [food, setFood] = useState(gameRef.current.getResource("food"))
     const [stone, setStone] = useState(gameRef.current.getResource("stone"))
     const [metal, setMetal] = useState(gameRef.current.getResource("metal"))
     const [wood, setWood] = useState(gameRef.current.getResource("wood"))
+
+    const [defence, setDefence] = useState(gameRef.current.getDefence())
+    const [danger, setDanger] = useState(gameRef.current.getDanger())
 
     const [buildings, setBuildings] = useState([])
     const [people, setPeople] = useState([])
@@ -36,13 +41,35 @@ const Frontend = () => {
             setStone(gameRef.current.getResource("stone"))
             setMetal(gameRef.current.getResource("metal"))
             setWood(gameRef.current.getResource("wood"))
-            console.log(gameRef.current.getResource("stone"))
         }
-        console.log(newBuilding)
+    }
+
+    const buildingLevelUp = (index) => {
+        if (gameRef.current.buildingLevelUp(index)) {
+            setBuildings([...gameRef.current.getBuildings()])
+            setStone(gameRef.current.getResource("stone"))
+            setMetal(gameRef.current.getResource("metal"))
+            setWood(gameRef.current.getResource("wood"))
+        }
+        
     }
 
     const addPerson = () => {
         setPeople(people.concat([gameRef.current.addPerson()]))
+    }
+
+    const endDay = () => {
+        gameRef.current.endDay()
+
+        setDay(gameRef.current.getDay())
+
+        setFood(gameRef.current.getResource("food"))
+        setStone(gameRef.current.getResource("stone"))
+        setMetal(gameRef.current.getResource("metal"))
+        setWood(gameRef.current.getResource("wood"))
+
+        setDefence(gameRef.current.getDefence())
+        setDanger(gameRef.current.getDanger())
     }
 
     const pages = {
@@ -53,18 +80,24 @@ const Frontend = () => {
 
     const displays = {
         blank: <div>Hello World</div>,
-        displayBuilding: <DisplayBuilding building={displayInfo} people={people}/>,
+        displayBuilding: <DisplayBuilding building={displayInfo} people={people} levelUp={buildingLevelUp}/>,
         displayConstructBuilding: <DisplayConstructBuilding addBuilding={addBuilding}/>,
     }
 
     return (
         <div>
             <div>
+                <div>Day: {day}</div>
+                <button onClick={() => endDay()}>End Day</button>
+            </div>
+            <div>
                 <h2>Resources</h2>
                 <div>Food: {food}</div>
                 <div>Stone: {stone}</div>
                 <div>Metal: {metal}</div>
                 <div>Wood: {wood}</div>
+                <div>Defensive Strength: {defence}</div>
+                <div>Enemy Strength: {danger}</div>
             </div>
             <div>
                 <h2>Menu</h2>

@@ -1,5 +1,6 @@
 const Building = class Building {
-    constructor(positions) {
+    constructor(positions, index) {
+        this.index = index
         this.positions = positions
         this.level = 1
         this.workers = Array(this.positions).fill(null)
@@ -8,10 +9,19 @@ const Building = class Building {
 
     applyEffect = (game) => {}
 
-    canLevelUp = (game) => {}
-    levelUp = () => {}
+    getIndex = () => {
+        return this.index
+    }
+
+    getLevel = () => {
+        return this.level
+    }
+
+    levelUp = (game) => {}
 
     getNPositions = () => { return this.positions }
+    
+    getKey = () => {}
     getName = () => {}
 
     // Methods related to workers
