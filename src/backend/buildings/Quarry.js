@@ -3,19 +3,16 @@ import Building from "./Building"
 
 const Quarry = class Quarry extends Building {
     static key = "quarry"
+    static skill = "stonecutting"
 
-    constructor(index) {
-        super(buildingStats.mine.positions, index)
+    static positions = 3
+    static cost = {
+        wood: 200,
+        metal: 100   
     }
 
-    applyEffect = (game) => {
-        let gains = 0
-        this.workers.forEach((worker) => {
-            if (worker !== null) {
-                gains += 100 * this.level
-            }
-        })
-        game.setResource("stone", game.getResource("stone") + gains)
+    constructor(index) {
+        super(buildingStats.quarry.positions, index)
     }
 
     getName = () => {
@@ -24,6 +21,17 @@ const Quarry = class Quarry extends Building {
 
     getKey = () => {
         return Quarry.key
+    }
+
+    applyEffect = (game) => {
+        let gains = 0
+        this.workers.forEach((worker) => {
+            if (worker !== null) {
+                gains += 100 * this.level * worker.getLevel(Quarry.skill)
+                worker.addExperience(Quarry.skill, 60)
+            }
+        })
+        game.setResource("stone", game.getResource("stone") + gains)
     }
 
     levelUp = (game) => {

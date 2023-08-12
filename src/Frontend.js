@@ -1,13 +1,15 @@
 import React, { useRef, useState } from 'react'
 
 import Buildings from './frontend/Buildings'
-import Economy from './frontend/Economy'
+import Map from './frontend/Map'
 import People from './frontend/People'
 
 import DisplayBuilding from './frontend/DisplayBuilding'
 import DisplayConstructBuilding from './frontend/DisplayConstructBuilding'
 
 import Game from './backend/Game'
+
+import "./frontend/css/frontend.css"
 
 const Frontend = () => {
     const [displayKey, setDisplayKey] = useState("blank")
@@ -72,9 +74,13 @@ const Frontend = () => {
         setDanger(gameRef.current.getDanger())
     }
 
+    const setTabPlusDisplay = (key) => {
+        setTabKey(key)
+    }
+
     const pages = {
         buildings: <Buildings setDisplay={updateDisplay} buildings={buildings}/>,
-        economy: <Economy setDisplay={updateDisplay}/>,
+        map: <Map setDisplay={updateDisplay}/>,
         people: <People setDisplay={updateDisplay} people={people}/>
     }
 
@@ -85,7 +91,7 @@ const Frontend = () => {
     }
 
     return (
-        <div>
+        <div className='page'>
             <div>
                 <div>Day: {day}</div>
                 <button onClick={() => endDay()}>End Day</button>
@@ -103,7 +109,7 @@ const Frontend = () => {
                 <h2>Menu</h2>
                 <div>
                     <button onClick = {() => setTabKey("buildings")}>Buildings</button>
-                    <button onClick = {() => setTabKey("economy")}>Economy</button>
+                    <button onClick = {() => setTabPlusDisplay("map")}>Map</button>
                     <button onClick = {() => setTabKey("people")}>People</button>
                 </div>
                 <div>{pages[tabKey]}</div>
