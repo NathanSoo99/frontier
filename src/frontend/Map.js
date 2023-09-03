@@ -1,8 +1,14 @@
 import React from 'react'
+import Place from './Place'
 
-const Map = () => {
+const Map = ({ setDisplay, places }) => {
     return (
-        <div>Map</div>
+        <div>
+            <div>{places.map((place, index) => (
+                <Place place={place} key={index} setDisplay={setDisplay}/>
+            ))}</div>
+        </div>
+
     )
 }
 

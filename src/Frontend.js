@@ -10,6 +10,7 @@ import DisplayConstructBuilding from './frontend/DisplayConstructBuilding'
 import Game from './backend/Game'
 
 import "./frontend/css/frontend.css"
+import DisplayPlace from './frontend/DisplayPlace'
 
 const Frontend = () => {
     const [displayKey, setDisplayKey] = useState("blank")
@@ -29,6 +30,7 @@ const Frontend = () => {
     const [danger, setDanger] = useState(gameRef.current.getDanger())
 
     const [buildings, setBuildings] = useState([])
+    const [places, ] = useState(gameRef.current.getPlaces())
     const [people, setPeople] = useState([])
 
     const updateDisplay = (key, info) => {
@@ -80,7 +82,7 @@ const Frontend = () => {
 
     const pages = {
         buildings: <Buildings setDisplay={updateDisplay} buildings={buildings}/>,
-        map: <Map setDisplay={updateDisplay}/>,
+        map: <Map setDisplay={updateDisplay} places={places}/>,
         people: <People setDisplay={updateDisplay} people={people}/>
     }
 
@@ -88,37 +90,33 @@ const Frontend = () => {
         blank: <div>Hello World</div>,
         displayBuilding: <DisplayBuilding building={displayInfo} people={people} levelUp={buildingLevelUp}/>,
         displayConstructBuilding: <DisplayConstructBuilding addBuilding={addBuilding}/>,
+        displayPlace: <DisplayPlace place={displayInfo} people={people}/>
     }
 
     return (
-        <div className='page'>
-            <div>
+        <div className='frontend'>
+            <div className='day-controls'>
                 <div>Day: {day}</div>
                 <button onClick={() => endDay()}>End Day</button>
             </div>
-            <div>
-                <h2>Resources</h2>
-                <div>Food: {food}</div>
-                <div>Stone: {stone}</div>
-                <div>Metal: {metal}</div>
-                <div>Wood: {wood}</div>
-                <div>Defensive Strength: {defence}</div>
-                <div>Enemy Strength: {danger}</div>
+            <div className='resource-bar'>
+                <div className='resource'>Stone: {stone}</div>
+                <div className='resource'>Metal: {metal}</div>
+                <div className='resource'>Wood: {wood}</div>
+                <div className='resource'>Food: {food}</div>
+                <div className='resource'>Defensive Strength: {defence}</div>
+                <div className='resource'>Enemy Strength: {danger}</div>
             </div>
-            <div>
-                <h2>Menu</h2>
+            <div className='menu'>
                 <div>
-                    <button onClick = {() => setTabKey("buildings")}>Buildings</button>
-                    <button onClick = {() => setTabPlusDisplay("map")}>Map</button>
-                    <button onClick = {() => setTabKey("people")}>People</button>
+                    <button className='menu-button' onClick = {() => setTabPlusDisplay("map")}>Map</button>
+                    <button className='menu-button' onClick = {() => setTabKey("buildings")}>Buildings</button>
+                    <button className='menu-button' onClick = {() => setTabKey("people")}>People</button>
                 </div>
-                <div>{pages[tabKey]}</div>
             </div>
-            <div>
-                <h2>Display</h2>
-                <div className="display">{displays[displayKey]}</div>
-            </div>
-            <div>
+            <div className='lists'>{pages[tabKey]}</div>
+            <div className="display">{displays[displayKey]}</div>
+            <div className='dev'>
                 <h2>Dev Tools</h2>
                 <button onClick={() => addPerson()}>Add Person</button>
             </div>

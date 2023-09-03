@@ -1,5 +1,6 @@
 import { buildingData, buildingStats } from './buildings/BuildingReference'
 import Person from './Person'
+import Place from './Place'
 
 const Game = class Game {
     constructor() {
@@ -16,7 +17,13 @@ const Game = class Game {
         this.nDays = 0
         this.defenceStrength = 0
         this.enemyStrength = 0
+        this.places = []
 
+        let i = 0
+        while (i < 4) {
+            this.places.push(new Place("Place " + i))
+            i++
+        }
     }
 
     addBuilding = (key) => {
@@ -117,11 +124,21 @@ const Game = class Game {
 
     endDay = () => {
         this.nDays += 1
-        this.enemyStrength += 100
+        
         this.defenceStrength = 0
+        this.enemyStrength = 0
+        this.places.forEach((place, index) => {
+            place.resolveExtermination()
+            place.setNEnemies(place.getNEnemies() + index)
+            this.enemyStrength += place.getEnemyStrength()
+        })
         
 
         this.applyBuildingEffects()
+    }
+
+    getPlaces = () => {
+        return this.places
     }
 }
 

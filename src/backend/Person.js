@@ -65,6 +65,10 @@ const Person = class Person {
         console.log(this.skills[skill])
         
     }
+
+    setWorkplacePosition = (position) => {
+        this.workplacePosition = position
+    }
 }
 
 export default Person
